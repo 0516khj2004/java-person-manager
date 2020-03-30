@@ -1,6 +1,7 @@
 package com.fastcampus.javaallinone.project3.mycontact.repository;
 
 import com.fastcampus.javaallinone.project3.mycontact.domain.Block;
+import org.assertj.core.api.AssertionsForClassTypes;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -28,8 +29,9 @@ class BlockRepositoryTests {
 
         List<Block> blocks = blockRepository.findAll();
 
-        assertThat(blocks.size()).isEqualTo(1);
-        assertThat(blocks.get(0).getName()).isEqualTo("koo");
+        assertThat(blocks.size()).isEqualTo(3);
+        AssertionsForClassTypes.assertThat(blocks.get(0).getName()).isEqualTo("koo");
+        AssertionsForClassTypes.assertThat(blocks.get(1).getName()).isEqualTo("koo1");
 
     }
 

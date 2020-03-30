@@ -12,83 +12,37 @@ import java.time.LocalDate;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-
+import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 @SpringBootTest
 class PersonServiceTests {
     @Autowired
     private PersonService personService;
 
-    @Autowired
-    private PersonRepository personRepository;
-
-    @Autowired
-    private BlockRepository blockRepository;
-
     @Test
     void getPeopleExcludeBlocks(){
-        givenPeople() ;
-//        givenBlocks();
         List<Person> result = personService.getPeopleExcludeBlocks();
-//        System.out.println(result);
+
         result.forEach(System.out::println);
+
+        assertThat(result.size()).isEqualTo(3);
+        assertThat(result.get(0).getName()).isEqualTo("koo2");
+        assertThat(result.get(1).getName()).isEqualTo("koo3");
+        assertThat(result.get(2).getName()).isEqualTo("koo4");
     }
     @Test
-    void cascadeTest(){
-        givenPeople();
-        List<Person> result = personRepository.findAll();
-        result.forEach(System.out :: println);
+    void getPeopleByName(){
 
-        Person person = result.get(3);
-        person.getBlock().setStartDate(LocalDate.now());
-        person.getBlock().setEndDate(LocalDate.now());
+        List<Person> result = personService.getPeopleByName("koo");
 
-        personRepository.save(person);
-        personRepository.findAll().forEach(System.out :: println);
-
-//        personRepository.delete(person);
-//        personRepository.findAll().forEach(System.out :: println);
-//
-//        blockRepository.findAll().forEach(System.out :: println);\
-
-        person.setBlock(null);
-        personRepository.save(person);
-        personRepository.findAll().forEach(System.out :: println);
-        blockRepository.findAll().forEach(System.out :: println);
-
+        assertThat(result.size()).isEqualTo(1);
+        assertThat(result.get(0).getName()).isEqualTo("koo");
     }
+
     @Test
     void getPerson(){
-        givenPeople();
         Person person  = personService.getPerson(4L);
-        System.out.println(person);
+
+        assertThat(person.getName()).isEqualTo("koo3");
     }
 
-
-
-    private void givenPeople() {
-        givenPerson("koo",25,"A");
-        givenPerson("kim",24,"A");
-        givenPerson("jung",25,"O");
-        givenBlockPerson("koo1",25,"B");
-        givenBlockPerson("koo2",25,"AB");
-    }
-
-//    private void givenBlocks() {
-//        givenBlock("koo");
-//    }
-
-    private void givenPerson(String name, int age, String bloodType) {
-        personRepository.save(new Person(name, age, bloodType));
-    }
-
-    private void  givenBlockPerson(String name, int age, String bloodType){
-        Person blockPerson = new Person(name, age, bloodType);
-        blockPerson.setBlock(new Block(name));
-
-        personRepository.save(blockPerson);
-    }
-
-//    private Block givenBlock(String name) {
-//       return blockRepository.save(new Block(name));
-//    }
 }
