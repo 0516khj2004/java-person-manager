@@ -1,9 +1,7 @@
 package com.fastcampus.javaallinone.project3.mycontact.controller.dto;
 
 import com.fastcampus.javaallinone.project3.mycontact.domain.dto.Birthday;
-import lombok.Data;
-import lombok.NonNull;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.Valid;
@@ -12,6 +10,8 @@ import javax.validation.constraints.NotEmpty;
 import java.time.LocalDate;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor(staticName = "of")
 public class PersonDto {
 
     private String name;
@@ -20,4 +20,5 @@ public class PersonDto {
     private LocalDate birthday;
     private String job;
     private String phoneNumber;
+
 }
