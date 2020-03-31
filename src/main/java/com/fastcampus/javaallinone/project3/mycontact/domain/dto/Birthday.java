@@ -1,5 +1,6 @@
 package com.fastcampus.javaallinone.project3.mycontact.domain.dto;
 
+import jdk.vm.ci.meta.Local;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,17 +15,24 @@ import java.time.LocalDate;
 @Data
 public class Birthday {
     private  Integer yearOfBirthday;
-    @Min(1)
-    @Max(12)
     private  Integer monthOfBirthday;
-
-    @Min(1)
-    @Max(31)
     private  Integer dayOfBirthday;
 
     public Birthday(LocalDate birthday){
         this.yearOfBirthday = birthday.getYear();
         this.monthOfBirthday = birthday.getMonthValue();
         this.dayOfBirthday = birthday.getDayOfMonth();
+    }
+
+    public int getAge(){
+        return LocalDate.now().getYear() - this.yearOfBirthday +1 ;
+    }
+
+    public boolean isBirthdayToday(){
+        return LocalDate.now().equals(LocalDate.of(yearOfBirthday, monthOfBirthday,dayOfBirthday));
+    }
+
+    public static Birthday of(LocalDate birthday){
+        return new Birthday(birthday);
     }
 }

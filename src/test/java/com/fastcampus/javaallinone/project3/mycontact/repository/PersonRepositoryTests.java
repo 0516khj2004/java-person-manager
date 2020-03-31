@@ -25,18 +25,15 @@ class PersonRepositoryTests {
     void crud(){
         Person person = new Person();
         person.setName("john");
-        person.setAge(25);
-        person.setBloodType("A");
+//        person.setBloodType("A");
         personRepository.save(person);
 
         List<Person> result = personRepository.findByName("john");
 
         assertThat(result.size()).isEqualTo(1);
         assertThat(result.get(0).getName()).isEqualTo("john");
-        assertThat(result.get(0).getAge()).isEqualTo(25);
-        assertThat(result.get(0).getBloodType()).isEqualTo("A");
-
-
+//        assertThat(result.get(0).getAge()).isEqualTo(25);
+//        assertThat(result.get(0).getBloodType()).isEqualTo("A");
     }
 //    @Test
 //    void  constructorTest(){
@@ -44,18 +41,19 @@ class PersonRepositoryTests {
 //
 //    }
 
-    @Test
-    void findByBloodType() {
-        List<Person> result = personRepository.findByBloodType("A");
-        assertThat(result.size()).isEqualTo(2);
-        assertThat(result.get(0).getName()).isEqualTo("koo");
-        assertThat(result.get(1).getName()).isEqualTo("koo4");
-
-    }
+//    @Test
+//    void findByBloodType() {
+//        List<Person> result = personRepository.findByBloodType("A");
+//        assertThat(result.size()).isEqualTo(2);
+//        assertThat(result.get(0).getName()).isEqualTo("koo");
+//        assertThat(result.get(1).getName()).isEqualTo("koo4");
+//
+//    }
 
     @Test
     void findByBirthdayBetween(){
         List<Person> result = personRepository.findByMonthOfBirthday(8);
+
 
         assertThat(result.size()).isEqualTo(2);
         assertThat(result.get(0).getName()).isEqualTo("koo");
