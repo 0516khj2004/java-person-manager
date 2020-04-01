@@ -6,6 +6,7 @@ import com.fastcampus.javaallinone.project3.mycontact.domain.dto.Birthday;
 import com.fastcampus.javaallinone.project3.mycontact.repository.PersonRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -109,11 +110,11 @@ class PersonControllerTests {
 
         assertAll(
                 ()->assertThat(result.getName()).isEqualTo("koo"),
-                ()->assertThat(result.getHobby()).isEqualTo("programing"),
-                ()->assertThat(result.getAddress()).isEqualTo("판교"),
-                ()->assertThat(result.getBirthday()).isEqualTo(Birthday.of(LocalDate.now())),
-                ()->assertThat(result.getJob()).isEqualTo("programmer"),
-                ()->assertThat(result.getPhoneNumber()).isEqualTo("010-9623-0516")
+                ()-> Assertions.assertThat(result.getHobby()).isEqualTo("programing"),
+                ()-> Assertions.assertThat(result.getAddress()).isEqualTo("판교"),
+                ()-> Assertions.assertThat(result.getBirthday()).isEqualTo(Birthday.of(LocalDate.now())),
+                ()-> Assertions.assertThat(result.getJob()).isEqualTo("programmer"),
+                ()-> Assertions.assertThat(result.getPhoneNumber()).isEqualTo("010-9623-0516")
         );
 
 
