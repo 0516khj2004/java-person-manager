@@ -6,6 +6,7 @@ import lombok.*;
 import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import java.time.LocalDate;
 
@@ -13,8 +14,9 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor(staticName = "of")
 public class PersonDto {
-
+    @NotBlank(message = "이름은 필수값입니다")
     private String name;
+
     private String hobby;
     private String address;
     private LocalDate birthday;
